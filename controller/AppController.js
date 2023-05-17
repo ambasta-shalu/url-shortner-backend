@@ -45,7 +45,7 @@ async function signup(req, res) {
       token,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(400).json({
       status: 400,
       message: error.message,
@@ -91,7 +91,7 @@ async function login(req, res) {
     }
     res.status(400).send("Invalid Credentials");
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(400).json({
       status: 400,
       message: error.message,
@@ -113,7 +113,7 @@ async function getUser(req, res) {
       lastName: user.lastName,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(400).json({
       status: 400,
       message: error.message,

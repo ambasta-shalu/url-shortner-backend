@@ -12,7 +12,7 @@ router.post("/", AuthUser, async (req, res) => {
   const { longUrl } = req.body;
 
   // finding user id from auth user
-  const userId = req.user._id;
+  const userid = req.user._id;
 
   // if valid, we create the url code
   const urlCode = shortid.generate();
@@ -24,7 +24,7 @@ router.post("/", AuthUser, async (req, res) => {
             in the collection that match the query. In this case, before creating the short URL,
             we check if the long URL was in the DB ,else we create it.
             */
-      let url = await UrlModel.findOne({ longUrl, userId });
+      let url = await UrlModel.findOne({ longUrl, userid });
 
       // url exist and return the respose
       if (url) {
@@ -33,9 +33,9 @@ router.post("/", AuthUser, async (req, res) => {
         // join the generated short code
         const shortUrl = urlCode;
 
-        // invoking the Url model and saving to the DB
+        // Create url in our database
         url = new UrlModel({
-          userId,
+          userid,
           longUrl,
           shortUrl,
           urlCode,
@@ -43,6 +43,7 @@ router.post("/", AuthUser, async (req, res) => {
 
         await url.save();
 
+        // return short url
         return res.status(201).json({
           status: 201,
           message: "Url Shorten Successfully",
@@ -50,14 +51,14 @@ router.post("/", AuthUser, async (req, res) => {
         });
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return res.status(500).json({
         status: 500,
         message: error.message,
       });
     }
   } else {
-    res.status(401).json("Invalid longUrl");
+    return res.status(401).json("Invalid longUrl");
   }
 });
 

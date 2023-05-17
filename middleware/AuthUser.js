@@ -23,7 +23,8 @@ async function AuthUser(req, res, next) {
 
     // pass down functionality to the endpoint
     next();
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     return res.status(401).send("Invalid Token...!");
   }
 }

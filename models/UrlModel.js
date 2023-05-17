@@ -18,6 +18,7 @@ const urlSchema = new Schema(
     },
     urlCode: {
       type: String,
+      unique: true,
     },
   },
   { timestamps: true }
