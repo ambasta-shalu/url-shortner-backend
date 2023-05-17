@@ -19,10 +19,6 @@ app.use(express.json());
 app.disable("x-powered-by");
 
 // routes
-app.get("/", (req, res) => {
-  res.send("Welome to Root 🤓");
-});
-
 app.use(userRoute);
 
 // app listening
