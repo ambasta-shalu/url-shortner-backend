@@ -3,6 +3,11 @@ const Schema = mongoose.Schema;
 
 const urlSchema = new Schema(
   {
+    userid: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     longUrl: {
       type: String,
       required: [true, "Please provide an URL"],
