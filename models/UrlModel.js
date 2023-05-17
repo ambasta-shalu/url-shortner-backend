@@ -3,9 +3,6 @@ const Schema = mongoose.Schema;
 
 const urlSchema = new Schema(
   {
-    urlCode: {
-      type: String,
-    },
     longUrl: {
       type: String,
       required: [true, "Please provide an URL"],
@@ -13,6 +10,9 @@ const urlSchema = new Schema(
     shortUrl: {
       type: String,
       unique: true,
+    },
+    urlCode: {
+      type: String,
     },
   },
   { timestamps: true }
