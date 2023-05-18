@@ -8,6 +8,8 @@ const db = require("./db/DB");
 const userRoute = require("./routes/UserRoute");
 const urlRoute = require("./routes/UrlRoute");
 const redirectRoute = require("./routes/RedirectRoute");
+const checkHealthRoute = require("./routes/CheckHealthRoute");
+
 const app = express();
 const port = process.env.PORT || API_PORT;
 
@@ -23,6 +25,7 @@ app.disable("x-powered-by");
 app.use(userRoute);
 app.use(urlRoute);
 app.use(redirectRoute);
+app.use(checkHealthRoute);
 
 // app listening
 app.listen(port, (error) => {
