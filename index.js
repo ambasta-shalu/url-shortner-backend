@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
-const { API_PORT } = process.env;
 const db = require("./db/DB");
 const userRoute = require("./routes/UserRoute");
 const urlRoute = require("./routes/UrlRoute");
@@ -11,7 +10,7 @@ const redirectRoute = require("./routes/RedirectRoute");
 const checkHealthRoute = require("./routes/CheckHealthRoute");
 
 const app = express();
-const port = process.env.PORT || API_PORT;
+const port = process.env.PORT || 7000;
 
 // calling mongodb here
 db();

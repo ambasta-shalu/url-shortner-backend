@@ -1,4 +1,4 @@
-const validUrl = requicreateShortUrlre("valid-url");
+const validUrl = require("valid-url");
 const shortid = require("shortid");
 const UrlModel = require("../models/UrlModel");
 
@@ -17,9 +17,9 @@ async function createShortUrl(req, res) {
   if (validUrl.isUri(longUrl)) {
     try {
       /* The findOne() provides a match to only the subset of the documents 
-              in the collection that match the query. In this case, before creating the short URL,
-              we check if the long URL was in the DB ,else we create it.
-              */
+        in the collection that match the query. In this case, before creating the short URL,
+        we check if the long URL was in the DB ,else we create it.
+       */
       let url = await UrlModel.findOne({ longUrl, userid });
 
       // url exist and return the respose
@@ -42,7 +42,7 @@ async function createShortUrl(req, res) {
         // return short url
         return res.status(201).json({
           status: 201,
-          message: "Url Shorten Successfully",
+          message: "Url Shorten Successfully 👻",
           shortUrl,
         });
       }
@@ -54,8 +54,34 @@ async function createShortUrl(req, res) {
       });
     }
   } else {
-    return res.status(401).json("Invalid longUrl");
+    return res.status(401).json("Invalid LongUrl 😑");
   }
 }
 
-module.exports = { createShortUrl };
+// *********************************************************************************************************************
+
+// GET ALL URLS
+async function getAllUrls(req, res) {
+  try {
+    // finding user id from auth user
+    const userid = req.user._id;
+
+    // fetching all urls related to specified user id
+    const allUrls = await UrlModel.find({ userid });
+
+    // return all urls
+    return res.status(201).json({
+      status: 201,
+      message: "All Urls fetched 👻",
+      allUrls,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({
+      status: 400,
+      message: error.message,
+    });
+  }
+}
+
+module.exports = { createShortUrl, getAllUrls };

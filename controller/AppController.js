@@ -41,7 +41,7 @@ async function signup(req, res) {
     // return token to user
     return res.status(201).json({
       status: 201,
-      message: "User Created Successfully",
+      message: "User Signed Up Successfully",
       token,
     });
   } catch (error) {
@@ -63,7 +63,7 @@ async function login(req, res) {
 
     // Validate user input
     if (!(email && password)) {
-      res.status(400).send("All input is required");
+      res.status(400).send("All Input Is Required 😑");
     }
 
     // Validate if user exist in our database
@@ -85,7 +85,7 @@ async function login(req, res) {
       // return token to user
       return res.status(200).json({
         status: 200,
-        message: "Login Successful",
+        message: "User Logged In Successfully",
         token,
       });
     }
@@ -102,7 +102,7 @@ async function login(req, res) {
 // *********************************************************************************************************************
 
 // GET USER DATA
-async function getUser(req, res) {
+async function getUserData(req, res) {
   try {
     // Get user
     const user = req.user;
@@ -121,4 +121,4 @@ async function getUser(req, res) {
   }
 }
 
-module.exports = { signup, login, getUser };
+module.exports = { signup, login, getUserData };

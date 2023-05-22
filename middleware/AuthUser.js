@@ -10,7 +10,7 @@ async function AuthUser(req, res, next) {
   const token = req.headers.authorization;
 
   if (!token) {
-    return res.status(403).send("A token is required for authentication");
+    return res.status(403).send("A token is required for authentication 😑");
   }
   try {
     //check if the token matches the supposed origin
@@ -25,7 +25,10 @@ async function AuthUser(req, res, next) {
     next();
   } catch (error) {
     console.error(error);
-    return res.status(401).send("Invalid Token...!");
+    return res.status(400).json({
+      status: 400,
+      message: error.message,
+    });
   }
 }
 

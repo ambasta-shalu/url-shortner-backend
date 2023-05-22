@@ -1,5 +1,5 @@
 const express = require("express");
-const { signup, login, getUser } = require("../controller/AppController");
+const { signup, login, getUserData } = require("../controller/AppController");
 const AuthUser = require("../middleware/AuthUser");
 
 // creating express route handler
@@ -11,7 +11,7 @@ router.post("/signup", signup);
 // LOGIN POST ROUTER
 router.post("/login", login);
 
-// GET USER ROUTER
-router.get("/", AuthUser, getUser);
+// GET USER DATA ROUTER
+router.get("/", AuthUser, getUserData);
 
 module.exports = router;
