@@ -95,8 +95,6 @@ async function delUrl(req, res) {
     // finding urlId from params to delete
     const urlId = req.params.urlId;
 
-    console.log(userid, urlId);
-
     // Validate URL ID
     if (!urlId) {
       res.status(400).send("Url Id Is Required 😑");
