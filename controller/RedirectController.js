@@ -12,12 +12,16 @@ async function redirect(req, res) {
     }
 
     return res.status(404).json({
-      msg: "url not found",
+      status: 404,
+      message: "url not found 😑",
     });
   } catch (error) {
     // exception handler
     console.error(error);
-    res.status(500).json("Server Error");
+    return res.status(400).json({
+      status: 400,
+      message: error.message,
+    });
   }
 }
 

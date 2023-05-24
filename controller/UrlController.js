@@ -84,4 +84,36 @@ async function getAllUrls(req, res) {
   }
 }
 
-module.exports = { createShortUrl, getAllUrls };
+// *********************************************************************************************************************
+
+// DELETE A URL
+async function delUrl(req, res) {
+  try {
+    // finding user id from auth user
+    const userid = req.user._id;
+
+    // finding urlId from params to delete
+    const urlId = req.params.urlId;
+
+    // Validate URL ID
+    if (!urlId) {
+      res.status(400).send("Url Id Is Required 😑");
+    }
+
+    await UrlModel.deleteOne({ userid, urlId });
+
+    // return
+    return res.status(201).json({
+      status: 201,
+      message: "Url deleted 👻",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({
+      status: 400,
+      message: error.message,
+    });
+  }
+}
+
+module.exports = { createShortUrl, getAllUrls, delUrl };
