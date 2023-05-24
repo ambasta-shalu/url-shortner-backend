@@ -16,6 +16,6 @@ router.post("/", AuthUser, createShortUrl);
 router.get("/urls", AuthUser, getAllUrls);
 
 // DELETE A URL ROUTER
-router.delete("/urls", AuthUser, delUrl);
+router.delete("/urls/:urlId", AuthUser, delUrl);
 
 module.exports = router;

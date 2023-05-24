@@ -95,17 +95,20 @@ async function delUrl(req, res) {
     // finding urlId from params to delete
     const urlId = req.params.urlId;
 
+    console.log(userid, urlId);
+
     // Validate URL ID
     if (!urlId) {
       res.status(400).send("Url Id Is Required 😑");
     }
 
-    await UrlModel.deleteOne({ userid, urlId });
+    const isDeleted = await UrlModel.deleteOne({ userid, _id: urlId });
 
     // return
     return res.status(201).json({
       status: 201,
-      message: "Url deleted 👻",
+      message: `Url Deleted 👻.`,
+      deletedCount: `${isDeleted.deletedCount}`,
     });
   } catch (error) {
     console.error(error);
