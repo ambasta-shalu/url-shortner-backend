@@ -9,11 +9,10 @@ async function redirect(req, res) {
     );
 
     if (url) {
-      // return url with clickCount
+      // return url
       return res.status(201).json({
         status: 201,
         url,
-        clickCount,
       });
     }
 

@@ -35,6 +35,7 @@ async function createShortUrl(req, res) {
           longUrl,
           shortUrl,
           urlCode,
+          clickCount: 0,
         });
 
         await url.save();
