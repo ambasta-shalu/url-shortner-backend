@@ -3,12 +3,18 @@ const UrlModel = require("../models/UrlModel");
 async function redirect(req, res) {
   try {
     // find a document match to the code in req.params.code
-    const url = await UrlModel.findOne({
-      urlCode: req.params.code,
-    });
+    const url = await UrlModel.findOneAndUpdate(
+      { urlCode: req.params.code },
+      { $inc: { clickCount: 1 } }
+    );
 
     if (url) {
-      return res.json(url);
+      // return url with clickCount
+      return res.status(201).json({
+        status: 201,
+        url,
+        clickCount,
+      });
     }
 
     return res.status(404).json({
@@ -18,8 +24,8 @@ async function redirect(req, res) {
   } catch (error) {
     // exception handler
     console.error(error);
-    return res.status(400).json({
-      status: 400,
+    return res.status(500).json({
+      status: 500,
       message: error.message,
     });
   }

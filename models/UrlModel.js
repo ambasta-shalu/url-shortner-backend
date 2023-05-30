@@ -20,6 +20,9 @@ const urlSchema = new Schema(
       type: String,
       unique: true,
     },
+    clickCount: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );
