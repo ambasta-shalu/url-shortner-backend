@@ -31,7 +31,7 @@ async function signup(req, res) {
       { user_id: user._id, email },
       process.env.TOKEN_KEY,
       {
-        expiresIn: "2h",
+        expiresIn: "6h",
       }
     );
 
@@ -75,7 +75,7 @@ async function login(req, res) {
         { user_id: user._id, email },
         process.env.TOKEN_KEY,
         {
-          expiresIn: "2h",
+          expiresIn: "6h",
         }
       );
 

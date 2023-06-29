@@ -98,7 +98,7 @@ async function delUrl(req, res) {
 
     // Validate URL ID
     if (!urlId) {
-      res.status(400).send("Url Id Is Required 😑");
+      res.status(409).send("Url Id Is Required 😑");
     }
 
     const isDeleted = await UrlModel.deleteOne({ userid, _id: urlId });

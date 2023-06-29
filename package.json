@@ -1,10 +1,9 @@
 {
   "name": "url-shortner-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a server part of MERN-app which transforms long, ugly links into nice, memorable and trackable short URLs with View Count 🤓",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
     "dev": "nodemon index.js"
   },
