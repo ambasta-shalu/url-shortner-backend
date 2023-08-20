@@ -4,32 +4,32 @@ const UrlModel = require("../models/UrlModel");
 
 // CREATE SHORT URL
 async function createShortUrl(req, res) {
-  // destructure the longUrl from req.body.longUrl
+  // DESTRUCTURE THE LONGURL FROM REQ.BODY.LONGURL
   const { longUrl } = req.body;
 
-  // finding user id from auth user
+  // FINDING USER ID FROM AUTH USER
   const userid = req.user._id;
 
-  // if valid, we create the url code
+  // IF VALID, WE CREATE THE URL CODE
   const urlCode = shortid.generate();
 
-  // check long url if valid using the validUrl.isUri method
+  // CHECK LONG URL IF VALID USING THE VALIDURL.ISURI METHOD
   if (validUrl.isUri(longUrl)) {
     try {
-      /* The findOne() provides a match to only the subset of the documents 
-        in the collection that match the query. In this case, before creating the short URL,
-        we check if the long URL was in the DB ,else we create it.
+      /* THE FINDONE() PROVIDES A MATCH TO ONLY THE SUBSET OF THE DOCUMENTS 
+        IN THE COLLECTION THAT MATCH THE QUERY. IN THIS CASE, BEFORE CREATING THE SHORT URL,
+        WE CHECK IF THE LONG URL WAS IN THE DB, ELSE WE CREATE IT.
        */
       let url = await UrlModel.findOne({ longUrl, userid });
 
-      // url exist and return the respose
+      // URL EXISTS AND RETURN THE RESPONSE
       if (url) {
         return res.json(url);
       } else {
-        // join the generated short code
+        // JOIN THE GENERATED SHORT CODE
         const shortUrl = urlCode;
 
-        // Create url in our database
+        // CREATE URL IN OUR DATABASE
         url = new UrlModel({
           userid,
           longUrl,
@@ -40,7 +40,7 @@ async function createShortUrl(req, res) {
 
         await url.save();
 
-        // return short url
+        // RETURN SHORT URL
         return res.status(201).json({
           status: 201,
           message: "Url Shorten Successfully 👻",
@@ -64,13 +64,13 @@ async function createShortUrl(req, res) {
 // GET ALL URLS
 async function getAllUrls(req, res) {
   try {
-    // finding user id from auth user
+    // FINDING USER ID FROM AUTH USER
     const userid = req.user._id;
 
-    // fetching all urls related to specified user id
+    // FETCHING ALL URLS RELATED TO SPECIFIED USER ID
     const allUrls = await UrlModel.find({ userid });
 
-    // return all urls
+    // RETURN ALL URLS
     return res.status(201).json({
       status: 201,
       message: "All Urls fetched 👻",
@@ -90,20 +90,19 @@ async function getAllUrls(req, res) {
 // DELETE A URL
 async function delUrl(req, res) {
   try {
-    // finding user id from auth user
+    // FINDING USER ID FROM AUTH USER
     const userid = req.user._id;
 
-    // finding urlId from params to delete
+    // FINDING URLID FROM PARAMS TO DELETE
     const urlId = req.params.urlId;
 
-    // Validate URL ID
+    // VALIDATE URL ID
     if (!urlId) {
       res.status(409).send("Url Id Is Required 😑");
     }
 
     const isDeleted = await UrlModel.deleteOne({ userid, _id: urlId });
 
-    // return
     return res.status(201).json({
       status: 201,
       message: `Url Deleted 👻.`,

@@ -10,7 +10,7 @@ const urlSchema = new Schema(
     },
     longUrl: {
       type: String,
-      required: [true, "Please provide a Long URL 😑"],
+      required: [true, "Please Provide A Long URL 😑"],
     },
     shortUrl: {
       type: String,

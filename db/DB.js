@@ -9,7 +9,7 @@ async function DB() {
   });
 
   connection.on("error", (err) => {
-    console.error("Mongoose connection error: " + err.message);
+    console.error(`Mongoose connection error: ${err.message}`);
   });
 
   connection.on("disconnected", () => {

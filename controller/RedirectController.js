@@ -2,14 +2,14 @@ const UrlModel = require("../models/UrlModel");
 
 async function redirect(req, res) {
   try {
-    // find a document match to the code in req.params.code
+    // FIND A DOCUMENT MATCH TO THE CODE IN REQ.PARAMS.CODE
     const url = await UrlModel.findOneAndUpdate(
       { urlCode: req.params.code },
       { $inc: { clickCount: 1 } }
     );
 
     if (url) {
-      // return url
+      // RETURN URL
       return res.status(201).json({
         status: 201,
         url,
@@ -18,10 +18,10 @@ async function redirect(req, res) {
 
     return res.status(404).json({
       status: 404,
-      message: "url not found 😑",
+      message: "Url Not Found 😑",
     });
   } catch (error) {
-    // exception handler
+    // EXCEPTION HANDLER
     console.error(error);
     return res.status(500).json({
       status: 500,

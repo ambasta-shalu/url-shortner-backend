@@ -12,22 +12,22 @@ const checkHealthRoute = require("./routes/CheckHealthRoute");
 const app = express();
 const port = process.env.PORT || 7000;
 
-// calling mongodb here
+// CALLING MONGODB HERE
 db();
 
-// middleware
+// MIDDLEWARE
 app.use(cors());
 app.use(express.json());
 app.disable("x-powered-by");
 
-// routes
+// ROUTES
 app.use(userRoute);
 app.use(urlRoute);
 app.use(redirectRoute);
 app.use(checkHealthRoute);
 
-// app listening
+// APP LISTENING
 app.listen(port, (error) => {
-  if (!error) console.log("server is successfully running on port " + port);
-  else console.log("error occurred, server can't start", error);
+  if (!error) console.log(`server is successfully running on port ${port}`);
+  else console.log(`error occurred, server can't start ${error}`);
 });

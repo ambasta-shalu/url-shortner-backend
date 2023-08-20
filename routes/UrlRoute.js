@@ -6,7 +6,7 @@ const {
   delUrl,
 } = require("../controller/UrlController");
 
-// creating express route handler
+// CREATING EXPRESS ROUTE HANDLER
 const router = express.Router();
 
 // CREATE SHORT URL POST ROUTER

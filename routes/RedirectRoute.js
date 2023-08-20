@@ -1,7 +1,7 @@
 const express = require("express");
 const { redirect } = require("../controller/RedirectController");
 
-// creating express route handler
+// CREATING EXPRESS ROUTE HANDLER
 const router = express.Router();
 
 // HANDLE REDIRECT GET ROUTER

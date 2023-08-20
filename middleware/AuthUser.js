@@ -1,27 +1,26 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/UserModel");
 
-// Function to enable me to protect a login endpoint from unauthenticated users.
+// FUNCTION TO ENABLE ME TO PROTECT A LOGIN ENDPOINT FROM UNAUTHENTICATED USERS.
 async function AuthUser(req, res, next) {
-  // const token =
-  //   req.body.token || req.query.token || req.headers["x-access-token"];
+  // const token = req.body.token || req.query.token || req.headers["x-access-token"];
 
-  //   get the token from the authorization header
+  //   GET THE TOKEN FROM THE AUTHORIZATION HEADER
   const token = req.headers.authorization;
 
   if (!token) {
     return res.status(409).send("A token is required for authentication 😑");
   }
   try {
-    //check if the token matches the supposed origin
+    //CHECK IF THE TOKEN MATCHES THE SUPPOSED ORIGIN
     const decodedToken = jwt.verify(token, process.env.TOKEN_KEY);
 
     const user = await userModel.findById(decodedToken.user_id);
 
-    // pass the user down to the endpoints here
+    // PASS THE USER DOWN TO THE ENDPOINTS HERE
     req.user = user;
 
-    // pass down functionality to the endpoint
+    // PASS DOWN FUNCTIONALITY TO THE ENDPOINT
     next();
   } catch (error) {
     console.error(error);

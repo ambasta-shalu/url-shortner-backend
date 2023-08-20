@@ -1,6 +1,6 @@
 const express = require("express");
 
-// creating express route handler
+// CREATING EXPRESS ROUTE HANDLER
 const router = express.Router();
 
 router.get("/health", (req, res) => {

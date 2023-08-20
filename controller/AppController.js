@@ -5,28 +5,28 @@ const jwt = require("jsonwebtoken");
 // SIGNUP
 async function signup(req, res) {
   try {
-    // Get user input
+    // GET USER INPUT
     const { email, firstName, lastName, password } = req.body;
 
-    // Check if user already exist
-    // Validate if user exist in our database
+    // CHECK IF USER ALREADY EXISTS
+    // VALIDATE IF USER EXISTS IN OUR DATABASE
     const oldUser = await UserModel.findOne({ email });
     if (oldUser) {
       return res.status(409).send("User Already Exist. Please Login 😑");
     }
 
-    //Encrypt user password
+    // ENCRYPT USER PASSWORD
     encryptedPassword = await bcrypt.hash(password, 10);
 
-    // Create user in our database
+    // CREATE USER IN OUR DATABASE
     const user = await UserModel.create({
-      email: email.toLowerCase(), // sanitize: convert email to lowercase
+      email: email.toLowerCase(), // SANITIZE: CONVERT EMAIL TO LOWERCASE
       firstName: firstName,
       lastName: lastName,
       password: encryptedPassword,
     });
 
-    // Create token
+    // CREATE TOKEN
     const token = jwt.sign(
       { user_id: user._id, email },
       process.env.TOKEN_KEY,
@@ -35,10 +35,10 @@ async function signup(req, res) {
       }
     );
 
-    // save user token
+    // SAVE USER TOKEN
     user.token = token;
 
-    // return token to user
+    // RETURN TOKEN TO USER
     return res.status(201).json({
       status: 201,
       message: "User Signed Up Successfully",
@@ -58,19 +58,19 @@ async function signup(req, res) {
 // LOGIN
 async function login(req, res) {
   try {
-    // Get user input
+    // GET USER INPUT
     const { email, password } = req.body;
 
-    // Validate user input
+    // VALIADTE USER INPUT
     if (!(email && password)) {
       res.status(400).send("All Input Is Required 😑");
     }
 
-    // Validate if user exist in our database
+    // VALIDATE IF USER EXISTS IN OUR DATABASE
     const user = await UserModel.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      // Create token
+      // CREATE TOKEN
       const token = jwt.sign(
         { user_id: user._id, email },
         process.env.TOKEN_KEY,
@@ -79,10 +79,10 @@ async function login(req, res) {
         }
       );
 
-      // save user token
+      // SAVE USER TOKEN
       user.token = token;
 
-      // return token to user
+      // RETURN TOKEN TO USER
       return res.status(200).json({
         status: 200,
         message: "User Logged In Successfully",
@@ -104,7 +104,7 @@ async function login(req, res) {
 // GET USER DATA
 async function getUserData(req, res) {
   try {
-    // Get user
+    // GET USER
     const user = req.user;
     return res.status(200).json({
       status: 200,

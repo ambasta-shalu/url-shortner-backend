@@ -5,22 +5,22 @@ const userSchema = new Schema(
   {
     email: {
       type: String,
-      required: [true, "Please provide an Email 😑"],
+      required: [true, "Please Provide An Email 😑"],
       unique: [true, "Email Exist 😑"],
     },
     firstName: {
       type: String,
-      required: [true, "Please provide First Name 😑"],
+      required: [true, "Please Provide First Name 😑"],
       unique: false,
     },
     lastName: {
       type: String,
-      required: [true, "Please provide Last Name 😑"],
+      required: [true, "Please Provide Last Name 😑"],
       unique: false,
     },
     password: {
       type: String,
-      required: [true, "Please provide a Password 😑"],
+      required: [true, "Please Provide A Password 😑"],
       unique: false,
       minLength: 8,
     },
