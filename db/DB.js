@@ -5,15 +5,15 @@ async function DB() {
   const connection = mongoose.connection;
 
   connection.on("connected", () => {
-    console.info("Mongoose connected ");
+    console.info("Mongoose Connected ");
   });
 
   connection.on("error", (err) => {
-    console.error(`Mongoose connection error: ${err.message}`);
+    console.error(`Mongoose Connection Error: ${err.message}`);
   });
 
   connection.on("disconnected", () => {
-    console.log("Mongoose disconnected");
+    console.log("Mongoose Disconnected");
   });
 }
 
